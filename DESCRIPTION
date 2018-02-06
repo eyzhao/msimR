@@ -1,0 +1,11 @@
+Package: msimR
+Title: Simulation of Somatic Single Nucleotide Variant Count Vectors for Mutation Signature Analysis
+Version: 0.0.0.9000
+Authors@R: person("Eric", "Zhao", email = "ezhao@bcgsc.ca", role = c("aut", "cre"))
+Description: Mutation signatures of somatic single nucleotide variants (SNVs) enable the characterization of genomic instability in cancers. Benchmarking of mutation signature methods, especially the accuracy of signature decomposition in individual samples, can benefit from simulating mutations probabilistically from a set of known signatures. msimR performs this simulation, generating mutation count vectors under varying conditions such as different numbers of mutations, numbers of active mutation processes, and random noise added to reference signatures. It can be configured to test and compare results from different mutation signature decomposition methods.
+Depends: R (>= 3.4.1)
+Imports: dplyr (>= 0.7.4), tidyr (>= 0.6.1), deconstructSigs (>= 1.8.0)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
