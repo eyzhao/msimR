@@ -26,12 +26,16 @@ SignIT_runner <- function(simulated_data) {
 
     data(stan_dso)
 
+    signit_cores <- getOption('signit_cores')
+    if (is.null(signit_cores)) {
+        signit_cores <- 8
+    }
     exposures <- get_exposures(
         mutation_catalog = catalog,
         reference_signatures = reference_signatures,
         stan_model = stan_dso,
         n_chains = 8,
-        n_cores = 8,
+        n_cores = signit_cores,
         n_iter = 200,
         n_adapt = 200
     )
