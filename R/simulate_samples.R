@@ -3,7 +3,7 @@
 #' 
 
 simulate_samples <- function(
-    reference_signatures = wtsi_30_snv_signatures,
+    reference_signatures = NULL,
     n_mutations = 1000,
     n_active_signatures = 5,
     chosen_signatures = c(),
@@ -11,6 +11,10 @@ simulate_samples <- function(
     perturbation_percent_deviation = 0
 ) {
     # Validate inputs
+    data(wtsi_30_snv_signatures)
+    if (is.null(reference_signatures)) {
+      reference_signatures = wtsi_30_snv_signatures
+    }
 
     sample_exposures <- exposure_sampler(n_active_signatures, n_mutations)
 

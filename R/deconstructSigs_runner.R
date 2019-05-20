@@ -41,14 +41,16 @@ deconstructSigs_runner <- function(simulated_data) {
     deconstructSigs_catalog <- simulated_data$catalog %>% 
         mutate(count = count / sum(count)) %>%
         spread(mutation_type, count) %>% 
-        as.data.frame
+        as.data.frame %>%
+        `rownames<-`('test')
 
     deconstructSigs_exposures <- whichSignatures(
         tumor.ref = deconstructSigs_catalog,
         signatures.ref = deconstructSigs_reference_signatures
     ) %>%
         .$weights %>% 
-        gather(signature, exposure)
+        gather(signature, exposure) %>%
+        filter(signature %in% rownames(deconstructSigs_reference_signatures))
 
     exposures <- tibble(signature = signature_names) %>%
         left_join(deconstructSigs_exposures, by = 'signature') %>%

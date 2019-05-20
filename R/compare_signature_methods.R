@@ -18,6 +18,7 @@ compare_signature_methods <- function(
         end_time <- Sys.time()
 
         simulated_data$quantitative_accuracy <- compute_quantitative_accuracy(simulated_data)
+        simulated_data$qualitative_accuracy <- compute_qualitative_accuracy(simulated_data)
         simulated_data$signature_errors <- compute_individual_signature_accuracy(simulated_data)
         simulated_data$run_time <- as.double(end_time - start_time, units = 'secs')
 
@@ -34,6 +35,11 @@ compare_signature_methods <- function(
                perturbation_percent_deviation = simulated_data$perturbation_percent_deviation,
                euclidean_distance = simulated_data$quantitative_accuracy$euclidean_distance,
                cosine_distance = simulated_data$quantitative_accuracy$cosine_distance,
+               sensitivity = simulated_data$qualitative_accuracy$sensitivity,
+               specificity = simulated_data$qualitative_accuracy$specificity,
+               ppv = simulated_data$qualitative_accuracy$ppv,
+               npv = simulated_data$qualitative_accuracy$npv,
+               accuracy = simulated_data$qualitative_accuracy$accuracy,
                run_time = simulated_data$run_time
             ) %>% gather(metric, value, -method)
 
@@ -45,7 +51,11 @@ compare_signature_methods <- function(
                 ) %>%
                 select(method, metric, value)
 
-            return(bind_rows(summary_table, signature_error_table))
+            summary_table <- bind_rows(summary_table, signature_error_table)
+
+            classification_table <- simulated_data$qualitative_accuracy$classification_table %>% mutate(method = simulated_data$method)
+            summary_table <- bind_rows(summary_table, classification_table)
+            return(summary_table)
         }
     })
 
