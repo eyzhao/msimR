@@ -24,7 +24,7 @@ SignIT_runner <- function(simulated_data) {
     signature_names <- simulated_data$signature_names
     n_mutations <- simulated_data$n_mutations
 
-    load('/projects/ezhao_prj/papers/SignIT-paper/analysis/scripts/stan_dso.RData')
+    data(stan_dso)
 
     exposures <- get_exposures(
         mutation_catalog = catalog,
