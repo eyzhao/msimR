@@ -24,8 +24,6 @@ SignIT_runner <- function(simulated_data) {
     signature_names <- simulated_data$signature_names
     n_mutations <- simulated_data$n_mutations
 
-    data(stan_dso)
-
     signit_cores <- getOption('signit_cores')
     if (is.null(signit_cores)) {
         signit_cores <- 8
@@ -33,7 +31,6 @@ SignIT_runner <- function(simulated_data) {
     exposures <- get_exposures(
         mutation_catalog = catalog,
         reference_signatures = reference_signatures,
-        stan_model = stan_dso,
         n_chains = 8,
         n_cores = signit_cores,
         n_iter = 200,
