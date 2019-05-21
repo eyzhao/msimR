@@ -40,6 +40,7 @@ compare_signature_methods <- function(
                ppv = simulated_data$qualitative_accuracy$ppv,
                npv = simulated_data$qualitative_accuracy$npv,
                accuracy = simulated_data$qualitative_accuracy$accuracy,
+               f1 = simulated_data$qualitative_accuracy$f1,
                run_time = simulated_data$run_time
             ) %>% gather(metric, value, -method)
 

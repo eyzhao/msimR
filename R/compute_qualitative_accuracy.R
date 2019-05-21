@@ -43,6 +43,9 @@ compute_qualitative_accuracy <- function(simulated_data) {
         npv = sum(! calculated_signature_present & ! signature_present) / sum(! calculated_signature_present), 
         accuracy = (sum(signature_present & calculated_signature_present) + sum(! signature_present & ! calculated_signature_present))/ n()
       ) %>%
+      mutate(
+        f1 = (2 * ppv * sensitivity) / (ppv + sensitivity)
+      ) %>%
       as.list()
 
     metrics$classification_table <- classification_table
